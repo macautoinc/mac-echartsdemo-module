@@ -1,0 +1,22 @@
+{
+  "name": "macautoinc-web-components",
+  "version": "1.22.22",
+  "description": "MACAutoInc Perspective Components",
+  "main": "dist/index.js",
+  "author": "Mac Automation Inc.",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna clean",
+    "check": "lerna check"
+  },
+  "devDependencies": {
+    "lerna": "7.4.2",
+    "typescript": "^5.2.2",
+    "yarn": "^1.22.19"
+  }
+}
