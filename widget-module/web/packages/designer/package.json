@@ -1,0 +1,42 @@
+{
+  "name": "@macautoinc/web-components-designer",
+  "version": "1.0.0",
+  "description": "Apex Charts Designer scope perspective components",
+  "main": "dist/index.js",
+  "typings": "dist/typings/web-components-designer.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn run clean && yarn run lint && webpack --mode development",
+    "design": "yarn run build",
+    "lint": "tslint -p tsconfig.json -c tslint.json typescript/**/*.tsx typescript/**/*.ts -t stylish",
+    "check": "yarn test && npm run lint",
+    "clean": "rimraf dist .awcache",
+    "deepClean": "npm run clean && rimraf node_modules __coverage__"
+  },
+  "dependencies": {
+    "@inductiveautomation/perspective-client": "2.1.38",
+    "@inductiveautomation/perspective-designer": "2.1.38",
+    "@macautoinc/web-components-client": "1.0.0",
+    "bind-decorator": "^1.0.11",
+    "mobx": "6.10.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/history": "^4.7.11",
+    "@types/jsnlog": "2.17.35",
+    "@types/moment-timezone": "^0.5.13",
+    "@types/react": "18.2.34",
+    "@types/react-dom": "18.2.14",
+    "@fiverr/afterbuild-webpack-plugin": "^1.0.0",
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "sass": "^1.69.5",
+    "sass-loader": "13.3.2",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "5.89.0",
+    "webpack-cli": "5.1.4",
+    "yarn": "^1.22.22"
+  }
+}

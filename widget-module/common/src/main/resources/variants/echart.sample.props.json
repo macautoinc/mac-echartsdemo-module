@@ -1,0 +1,57 @@
+{
+  "option": {
+    "dataset": {
+      "dimensions": [
+        "day",
+        "amount"
+      ],
+      "source": [
+        {
+          "day": "Mon",
+          "amount": 120
+        },
+        {
+          "day": "Tue",
+          "amount": 200
+        },
+        {
+          "day": "Wed",
+          "amount": 150
+        },
+        {
+          "day": "Thu",
+          "amount": 80
+        },
+        {
+          "day": "Fri",
+          "amount": 70
+        },
+        {
+          "day": "Sat",
+          "amount": 110
+        },
+        {
+          "day": "Sun",
+          "amount": 130
+        }
+      ]
+    },
+    "xAxis": {
+      "type": "category"
+    },
+    "yAxis": {
+      "type": "value"
+    },
+    "series": [
+      {
+        "type": "bar",
+        "itemStyle": {
+          "valueIndex": 0,
+          "itemStyle": {
+            "color": "#a90500"
+          }
+        }
+      }
+    ]
+  }
+}
