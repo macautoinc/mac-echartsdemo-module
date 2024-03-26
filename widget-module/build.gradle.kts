@@ -45,8 +45,8 @@ ignitionModule {
     // Ignition which classes should be loaded in a given scope.
     hooks.putAll(
             mapOf(
-                    "com.macautoinc.echarts.gateway.GatewayHook" to "G",
-                    "com.macautoinc.echarts.designer.DesignerHook" to "D"
+                    "com.macautoinc.widget.gateway.GatewayHook" to "G",
+                    "com.macautoinc.widget.designer.DesignerHook" to "D"
             )
     )
     skipModlSigning.set(true)

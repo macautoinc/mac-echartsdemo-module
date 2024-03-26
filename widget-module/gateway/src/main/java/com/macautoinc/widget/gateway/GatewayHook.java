@@ -1,4 +1,4 @@
-package com.macautoinc.echarts.gateway;
+package com.macautoinc.widget.gateway;
 
 import com.inductiveautomation.ignition.common.licensing.LicenseState;
 import com.inductiveautomation.ignition.common.util.LoggerEx;
@@ -7,9 +7,9 @@ import com.inductiveautomation.ignition.gateway.model.GatewayContext;
 import com.inductiveautomation.perspective.common.api.ComponentRegistry;
 import com.inductiveautomation.perspective.gateway.api.ComponentModelDelegateRegistry;
 import com.inductiveautomation.perspective.gateway.api.PerspectiveContext;
-import com.macautoinc.echarts.common.Components;
-import com.macautoinc.echarts.common.component.display.*;
-import com.macautoinc.echarts.gateway.delegate.EChartModelDelegate;
+import com.macautoinc.widget.common.Components;
+import com.macautoinc.widget.gateway.delegate.EChartModelDelegate;
+import com.macautoinc.widget.common.component.display.GaugeEChart;
 
 import java.util.Optional;
 

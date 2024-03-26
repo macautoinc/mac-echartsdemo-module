@@ -1,4 +1,4 @@
-package com.macautoinc.echarts.designer;
+package com.macautoinc.widget.designer;
 
 import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.common.licensing.LicenseState;
@@ -8,7 +8,7 @@ import com.inductiveautomation.ignition.designer.model.DesignerContext;
 import com.inductiveautomation.perspective.designer.DesignerComponentRegistry;
 import com.inductiveautomation.perspective.designer.api.ComponentDesignDelegateRegistry;
 import com.inductiveautomation.perspective.designer.api.PerspectiveDesignerInterface;
-import com.macautoinc.echarts.common.component.display.*;
+import com.macautoinc.widget.common.component.display.GaugeEChart;
 
 
 /**

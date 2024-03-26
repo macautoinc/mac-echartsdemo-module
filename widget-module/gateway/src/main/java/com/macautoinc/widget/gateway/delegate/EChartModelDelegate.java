@@ -1,4 +1,4 @@
-package com.macautoinc.echarts.gateway.delegate;
+package com.macautoinc.widget.gateway.delegate;
 
 import com.inductiveautomation.ignition.common.gson.Gson;
 import com.inductiveautomation.ignition.common.gson.JsonObject;

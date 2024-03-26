@@ -1,4 +1,4 @@
-package com.macautoinc.echarts.common;
+package com.macautoinc.widget.common;
 
 import com.inductiveautomation.perspective.common.api.BrowserResource;
 

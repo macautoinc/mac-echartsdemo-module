@@ -1,9 +1,9 @@
-package com.macautoinc.echarts.common.component.display;
+package com.macautoinc.widget.common.component.display;
 
 import com.inductiveautomation.ignition.common.gson.JsonParser;
 import com.inductiveautomation.perspective.common.api.ComponentDescriptor;
 import com.inductiveautomation.perspective.common.api.ComponentDescriptorImpl;
-import com.macautoinc.echarts.common.Components;
+import com.macautoinc.widget.common.Components;
 
 import javax.swing.*;
 import java.io.InputStreamReader;
