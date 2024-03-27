@@ -300,7 +300,7 @@
         "title": {},
         "detail": {
           "offsetCenter": ["-15%", 0],
-          "formatter": "function() { return ['{a|                  00:00}', '{a|行驶时间       0:00}{b| h}', '{a|行驶距离        0.0}{b| km}', '{a|平均耗能        ---}{b| 1/100km}', '{a|平均速度        ---}{b| km/h}'].join('\n') }",
+          "formatter": "function() { return ['{a|         00:00}', '{a|travel time  0:00}{b| h}', '{a|travel distance 0.0}{b| km}', '{a|avg energy usage ---}{b| 1/100km}', '{a|avg speed     ---}{b| km/h}'].join('\\n') }",
           "rich": {
             "a": {
               "fontSize": 14,
