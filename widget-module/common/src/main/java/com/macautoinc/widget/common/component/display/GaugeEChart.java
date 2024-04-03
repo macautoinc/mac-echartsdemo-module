@@ -9,15 +9,37 @@ import javax.swing.*;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+/**
+ * The {@code GaugeEChart} class represents a gauge-style EChart component within the MAC Auto Inc. widget module.
+ * It extends the {@link BaseEChart} class, inheriting its basic properties and behaviors, while specifying
+ * additional configurations and palette entries specific to gauge charts.
+ * <p>
+ * This class is responsible for defining the component ID, setting up the component descriptor, and registering
+ * various gauge-specific variants that can be utilized within the perspective views.
+ * </p>
+ */
 public class GaugeEChart extends BaseEChart {
+
+    /**
+     * The unique identifier for the gauge EChart component. This ID is used to register and reference
+     * the component within the system.
+     */
     public static String COMPONENT_ID = "macautoinc.display.gauge.echart";
 
+    /**
+     * The component descriptor for the gauge EChart. It includes configurations such as the palette category,
+     * the component ID, module ID, schema, name, icon, and various palette entries representing different
+     * gauge variants like basic, simple, speed, progress, etc.
+     * <p>
+     * Each palette entry defines a specific variant of the gauge chart, providing a title, description,
+     * and a JSON object representing the variant's properties.
+     * </p>
+     */
     public static ComponentDescriptor DESCRIPTOR = ComponentDescriptorImpl.ComponentBuilder.newBuilder()
             .setPaletteCategory(Components.COMPONENT_CATEGORY)
             .setId(COMPONENT_ID)
             .setModuleId(Components.MODULE_ID)
-            .setSchema(SCHEMA) //  this could alternatively be created purely in Java if desired
-//            .setEvents(Arrays.asList(ANIMATION_END_HANDLER, BEFORE_MOUNT_HANDLER, MOUNTED_HANDLER, UPDATED_HANDLER, CLICK_HANDLER, MOUSE_MOVE_HANDLER, LEGEND_CLICK_HANDLER, MARKER_CLICK_HANDLER, SELECTION_HANDLER, DATA_POINT_SELECTION_HANDLER, DATA_POINT_MOUSE_ENTER_HANDLER, DATA_POINT_MOUSE_LEAVE_HANDLER, ZOOMED_HANDLER, SCROLLED_HANDLER, BRUSH_SCROLLED_HANDLER))
+            .setSchema(SCHEMA) // this could alternatively be created purely in Java if desired
             .setName("EChart")
             .setIcon(new ImageIcon(Objects.requireNonNull(Components.class.getResource("/icons/echarts-logo.png"))))
             .addPaletteEntry("", "Gauge", "A Gauge EChart component.", null, null)
