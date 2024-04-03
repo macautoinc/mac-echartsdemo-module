@@ -39,9 +39,6 @@ public class BaseEChart {
             .setName("EChart")
             .setIcon(new ImageIcon(Objects.requireNonNull(Components.class.getResource("/icons/echarts-logo.png"))))
             .addPaletteEntry("", "EChart MAC", "An Sample EChart component.", null, null)
-            .addPaletteEntry("sample", "Sample Bar EChart MAC", "An Sample EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/echart.sample.props.json")))).getAsJsonObject())
-            .addPaletteEntry("radarSample", "Sample Radar EChart MAC", "An Sample EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/echart.radar.sample.props.json")))).getAsJsonObject())
-            .addPaletteEntry("customPieSample", "Custom Sample Pie EChart MAC", "An Sample EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/echart.custom.pie.sample.props.json")))).getAsJsonObject())
             .setDefaultMetaName("baseEChart")
             .setResources(Components.BROWSER_RESOURCES)
             .build();
