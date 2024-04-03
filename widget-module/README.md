@@ -1,193 +1,77 @@
 # Perspective Component Module Example
 
-This is an example module which adds a custom component to the Perspective module. For this exercise, a Gauge widget will be
-added to the Perspective palette. Hopefully, it will serve as a blueprint to create more widgets to include in your projects. 
-This example will demonstrate how to import an existing collection of widgets into Ignition's perspective palette and show a 
-few different ways of dealing with data and configuration of the component in the gateway designer.
+This document serves as a guide for adding a custom Gauge widget to the Perspective module's palette. It aims to be a foundational resource for developers looking to expand their projects with more widgets. Through this example, we'll explore how to integrate a collection of widgets into the Perspective palette, focusing on various approaches to data handling and component configuration within the gateway designer.
 
-This example is only one of the countless ways a savvy developer can build a module targeting Perspective.
-Ultimately, it's up to you, the implementor, to choose the tools that you prefer.
+This instance represents just one of many strategies a developer might employ to craft a module for Perspective. The choice of tools and methodologies ultimately rests with the developer.
 
-## Quick Tool Overview
+## Overview of Tools Used
 
-This project uses a number of build tools in order to complete the various parts of its assembly. It's importatnt to
-note that these tools are just some example options. You may use any tool you want (or no tool at all). These examples
-use:
+The construction of this project leverages several tools, each playing a crucial role in different stages of the build process. It's important to recognize that these tools are merely suggestions; developers are free to choose their preferred tools or opt to work without them. This project includes:
 
-* [Gradle](https://gradle.org/) - the primary build tool. Most tasks executed in a typical workflow are gradle tasks.
-* [lerna.js](https://lernajs.io/) - is a javascript build-orchestration tool. It allows us to have independent 'modules'
-  and 'packages' in the same git/hg repository without having to do a lot of complicated symlinking/publishing to pull
-  in changes from one project to another. It's mostly useful from the commandline, outside of gradle.
-* [yarn](https://yarnpkg.com/) - is a javascript dependency (package) manager that provides a number of improvements
-  over npm, though it shares much of the same commands and api. Much like Ivy or Maven, yarn is used to resolve and
-  download dependencies hosted on remotely hosted repositories. Inductive Automation publishes our own dependencies
-  through the
-  same nexus repository system we use for other sdk artifacts. To correctly resolve the Inductive Automation node
-  packages,
-  an `.npmrc` file needs to be added to the front end projects to tell yarn/npm where to find packages in
-  the `@inductiveautomation` namespace. You will find examples of these in the `web/` directory.
-* [Typescript](https://www.typescriptlang.org/) - the language used to write the front end parts. Typescript is not
-  required, but is strongly recommended. Typescript can be thought of as modern javascript with types added (though this
-  is a simplification). The addition of types to JS results in a far better developer experience through much better
-  tooling
-  support. This can improve maintainability, refactoring, code navigation, bug discovery, etc. Typescript has its own
-  compiler which emits javascript. This compiler is frequently paired with other build tools in a way that it emits the
-  javascript, but
-  other tools handle the actual bundling of assets, css, and other supporting dependencies. Think of typescript as the
-  java compiler without jars or resources. It just takes typescript files in, and emits the javascript files.
-* [Webpack](https://webpack.js.org/) - the 'bundler' that we use to take the javascript emitted by the typescript
-  compiler and turn it into an actual package that includes necessary assets, dependencies, generates sourcemaps, etc.
+* [Gradle](https://gradle.org/) serves as the main build tool, facilitating most of the routine tasks in a typical development workflow.
+* [lerna.js](https://lerna.js.org/) is a tool for managing JavaScript projects with multiple packages, simplifying the process of linking and publishing changes across projects within the same repository. It's particularly useful for command-line operations outside of Gradle.
+* [yarn](https://yarnpkg.com/) is a package manager for JavaScript, offering several advantages over npm. It's used for dependency resolution and downloading packages from remote repositories. To resolve Inductive Automation's node packages, an **.npmrc** file must be added to the project's front-end directories, directing yarn/npm to the correct package locations within the **@inductiveautomation** namespace.
+* [Typescript](https://www.typescriptlang.org/) is the chosen language for the project's front-end development. While not mandatory, Typescript is highly recommended for its support of types, which enhances the development experience by improving tooling support for maintenance, refactoring, code navigation, and bug detection. Typescript compiles to JavaScript, with other tools typically handling asset bundling and dependency management.
+* [Webpack](https://webpack.js.org/) is used to bundle the JavaScript output from Typescript, along with any necessary assets, dependencies, and sourcemaps, into a final package ready for deployment.
 
-More documentation incoming, and the web/README.md contains a lot of information about the typescript build process.
+Further documentation is forthcoming, and the **web/README.md** file contains detailed information about the Typescript build process.
 
-## Getting Started
+### Initial Setup
 
-This is a quick-start set of requirements/commands to get this project built.
+Here's a streamlined guide to get this project up and running.
 
-Strictly speaking, this module should be buildable without downloading or installing any additional tools. If
-build commands are executed through the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html),
-it will handle downloading the appropriate versions of all tools, and then use those tools to execute the build.
+Ideally, the module can be built without the need for additional tool installations. By utilizing the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html), all necessary tools are automatically downloaded and utilized to execute the build process.
+
+##### Note: Module-specific tasks are defined by the module plugin. For more details on these tasks and configuration options, refer to the documentation at the [Ignition Module Tool](https://github.com/inductiveautomation/ignition-module-tools) repository.
+
+To initiate the build, clone this repository, navigate to the **perspective-component** directory in a command line interface, and execute the **build** gradle task:
+
+If executed on Windows:
+
+**gradlew build**
+
+If executed on Linux/OSX
+
+**./gradlew build**
 
 
-> Note: the module related task are defined by the module plugin. Check the documentation at
-> the [Ignition Module Tool](https://github.com/inductiveautomation/ignition-module-tools) repository for more
-> information
-> about the tasks and configuration options.
+For those interested in running parts of the build independently of Gradle, familiarity with the JavaScript and TypeScript ecosystems is necessary, including tools like NodeJs, NPM/Yarn, TypeScript, Webpack, Babel, etc.
 
-To run the build, clone this repo and open a command line in the `perspective-component` directory, and run the `build`
-gradle task:
+A rough guide to setting up these tools is as follows:
 
-```
-// on Windows
-gradlew build
+1. Node and npm installation is the first step, which then allows for the installation of yarn, typescript, webpack, etc. NodeJS can be installed from the NodeJS Website, with LTS versions recommended. The specific versions used in the build are listed in the **./web/build.gradle** file within the **node** configuration block.
+2. Once npm is installed, proceed to install the global dev-dependency tools. These should match the versions specified in your package.json files as closely as possible.
 
-// on linux/osx
-./gradlew build
-```
+    * **npm install -g typescript**
+    * **npm install -g webpack@3.10.1** // Adjust the version as needed
+    * **npm install -g tslint**
+    * **npm install -g lerna**
+    * **npm install -g yarn**
 
-If you would like to be able to execute parts of the build without depending on gradle, you'll need familiarity with
-the javascript and typescript ecosystem, including NodeJs, NPM/Yarn, Typescript, Webpack, Babel, etc.
+3. Gradle does not require installation if commands are executed through the gradle wrapper, as detailed in the [Gradle Wrapper Docs](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
 
-While not a comprehensive instruction set, the process of setting up these tools would look something like the
-following:
+A quick note: This example utilizes a custom gradle plugin developed by IA for building Ignition modules. Originally intended for internal use, the plugin assumes certain project structures and dependencies. While Maven can be used for building perspective modules, integration and support for Perspective module development with the **ignition-maven-plugin** are not planned.
 
-1. Install node and npm, which can be used to further install yarn, typescript, webpack, etc. MacOs and Linux can
-   install via package managers, or they and Windows can be installed via the downloads at the
-   [NodeJS Website](https://nodejs.org/). We recommend sticking with the LTS versions (actual versions used by the
-   build)
-   can be seen in the `./web/build.gradle` file, within the `node` configuration block.
+### Project Structure & Overview
 
-2. With npm installed, install the global dev-dependency tools. While it's possible to make gradle handle all these,
-   it's useful to have them installed locally to speed build times and run local checks and commands without gradle. In
-   general, you want these to be the same (or very close) version as those defined in your package.json files.
-    1. `npm install -g typescript`
-    2. `npm install -g webpack@3.10.1`   // or whatever version you want
-    3. `npm install -g tslint`
-    4. `npm install -g lerna`
-    5. `npm install -g yarn`
+This section outlines the project's layout, offering a broad view of its components. For more detailed information about the **web** subproject, refer to its readme file.
 
-3. Gradle - gradle does not need to be installed if commands are executed through the gradle wrapper (see
-   [Gradle Wrapper Docs](https://docs.gradle.org/current/userguide/gradle_wrapper.html) for details).
+The module's structure follows a typical Ignition Module layout with a notable exception. Like many cross-scope projects, it includes a **common** subproject shared between the gateway and designer scopes. However, it lacks a **client** scope, featuring a **web** subproject instead. This subproject houses the source code, assets, and build configurations for the module's HTML/JS/CSS components.
 
-Quick Note:  This example is built using a custom gradle plugin developed by IA in order to build Ignition modules.
-This plugin was originally intended for internal use and, as a result, it makes some assumptions about project
-structure and dependencies. If you are familiar with Maven and wish to use it to build perspective modules, you may
-do so, though we do not plan integrating nor supporting Perspective module development with the `ignition-maven-plugin`.
+The **web** directory contains a _lerna workspace_, akin to a multi-module project in Maven or a multi-project build in Gradle. This setup allows for more than one build configuration, with our project targeting both a runtime perspective client in a browser and a perspective in the designer. The output from both packages within the **web/** directory ultimately becomes part of the **gateway** scoped Java project, from where it is served. The naming (**client** or **designer**) is less critical than ensuring the files are correctly registered in the appropriate registries.
 
-### Project structure & Layout
+#### Building the Module
 
-This section provides a high-level overview of the different parts of this project. For additional details about
-the `web` subproject, see the readme there.
+Building the module with the gradle wrapper is straightforward. Execute `./gradlew build` in a bash or similar terminal (Linux/OSX) or `gradle.bat build` on Windows. This process ensures the download of the correct gradle binaries, as specified by our **wrapper** task and the committed **gradle**/ directory, compiles and assembles all jars, runs tests/checks, and ultimately produces the signed modl file. Note that module signing requires appropriate certificates and a **gradle.properties** file configured as described in the plugin readme at the [Tools Repository](https://github.com/inductiveautomation/ignition-module-tools).
 
-This example module has a fairly traditional Ignition Module project layout with one key difference. Like most
-cross-scope projects, this one has a `common` subproject which is shared between gateway and designer scopes. What it
-does NOT
-have is a `client` scope. Instead we have a `web` subproject which contains the source code, assets, and build
-configuration used to build the html/js/css used in the module.
+#### Customization and Configuration
 
-Within the `web` directory is a _lerna workspace_, which is simply a javascript corollary to a 'maven multi-module
-project', or a 'multi-project gradle build'. Meaning, there are more than one 'build' configured. We have stuck
-with the lerna default of using `packages` directory that has our two builds - one targeting a perspective client
-at runtime in a browser, and a second targeting perspective in the designer. As in Vision, the perspective designer
-scoped assets frequently extend the perspective client scoped assets (again, remembering that this is client in the
-context of the web, meaning executing in a web browser. Nothing to do with _vision clients_). Ultimately the output
-of both web/ packages ends up in our `gateway` scoped java project as resources, as the gateway is where they get
-served from. That they are named `client` or `designer` is unimportant. They could be `browser` and `designer` or
-whatever you choose. The important part is making sure the files are appropriately registered in the appropriate
-registries.
+The scope of this example does not extend to detailed build customization. We encourage developers to explore the documentation of the tools mentioned above to tailor the build process to their project's needs.
 
-```
+#### SDK Insights
 
+Given the complexity and ongoing development of Perspective, it's advisable to test modules against every intended version of Ignition/Perspective. While the APIs are considered relatively stable, future updates may introduce changes or enhancements.
 
-  ├── build.gradle.kts                     // root build configuration, like a root pom.xml file
-  ├── common
-  │   ├── build.gradle.kts                     // configuration for common scoped build
-  │   └── src
-  │       └── main/java                    // where source files live
-  ├── designer
-  │   ├── build.gradle.kts
-  │   └── src
-  │       └── main/java
-  ├── gateway
-  │   ├── build.gradle.kts
-  │   └── src
-  │       └── main/java
-  ├── gradle                              // gradle wrapper assets to allow wrapper functionality,should be commited
-  │   └── wrapper
-  │       ├── gradle-wrapper.jar
-  │       └── gradle-wrapper.properties
-  ├── gradlew                             // gradle build script for linux/osx
-  ├── gradlew.bat                         // gradle build script for windows
-  ├── settings.gradle.kts                 // Gradle project structure/global configuration.
-  └── web                                 // parent directory for the web assets we build
-      ├── README.md
-      ├── build.gradle.kts
-      ├── lerna.json                      // lerna configuration file
-      │
-      ├── package.json
-      ├── packages
-      │   ├── client
-      │   │    ├── package.json
-      │   │    ├── webpack.config.json     // webpack build configuration
-      │   │    └── typescript/             // typescript source files
-      │   │
-      │   └── designer
-      │        ├── package.json
-      │        ├── webpack.config.json     // webpack build configuration
-      │        └── typescript/             // typescript source files
-      └── yarn.lock                        // lock file describes the dependencies/versions of front-end resources
+##### Conventions
 
-```
-
-### Building
-
-Building this module through the gradle wrapper is easy!
-
-In a bash (or any similar posix) terminal execute `./gradlew build` (linux/osx). If on windows, run
-`gradle.bat build`. This will result in the appropriate gradle binaries being downloaded (match the version
-and info provided by our `wrapper` task and committed `gradle/` directory). This will compile and assemble all jars,
-run all tests/checks, and ultimately create the signed modl file. Note that to sign your module, you'll need appropriate
-signing certificates, and a `gradle.properties` file that points to those certificates, following the configuration
-described on plugin readme in the [Tools Repository](https://www.github.com/inductiveautomation/ignition-module-tools).
-
-### Configuring/Customizing
-
-How to configure and customize the build is outside the scope of this example. We encourage you to read the docs of
-the various tools used and linked above to determine the appropriate build configurations for your project.
-
-### SDK Tips
-
-Perspective is a fairly complex system that is seeing regular changes/additions. While we consider the APIs 'mostly
-stable', there will likely be additions and/or breaking changes as it matures. As a result, we encourage testing modules
-against each version of Ignition/Perspective you intend to support.
-
-#### Standards
-
-As of the 8.1.4 release, a `ref` is passed down to the component via `emit` (emit props). This is required to
-provide back a reference to the root element of each component, which is used internally by the Perspective module.
-For this reason, the root element of any authored components cannot contain a `ref` property. Doing so will
-override the emitted ref and will not allow your component to properly display any changes to the state of its
-qualities and may cause the component to throw an error. The ref can still be accessed from the component's store,
-if needed. In addition, it is highly recommended that the root element does not change throughout the lifecycle
-of the component. For more information and an example usage, see the `MessengerComponent` from the example
-components.
+From the 8.1.4 release onwards, components receive a **ref** via **emit** props, essential for internal use by the Perspective module to reference the root element of each component. Consequently, the root element in custom components should not include a **ref** property to avoid overriding the emitted ref, which could lead to display or error issues. The component's store can still access the ref if necessary. Additionally, maintaining a consistent root element throughout the component's lifecycle is recommended. For an implementation example, see the **MessengerComponent** in the example components.
