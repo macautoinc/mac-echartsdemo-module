@@ -45,6 +45,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "widget-module"
 
-
 // link up our subprojects as part of this multi-project build.  Add/remove subprojects gradle path notation.
 include(":common", ":gateway", ":designer", ":web")
