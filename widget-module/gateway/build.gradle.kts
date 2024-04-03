@@ -1,26 +1,32 @@
+// Apply necessary plugins for the project
 plugins {
-    eclipse
-    `java-library`
+    eclipse // Applies the Eclipse plugin for integration with Eclipse IDE
+    `java-library` // Applies the Java Library plugin to support Java library development
 }
 
+// Configure the Java toolchain
 java {
     toolchain {
+        // Set the Java language version to 11 for compilation and execution
         languageVersion.set(JavaLanguageVersion.of(11))
     }
 }
 
+// Define project dependencies
 dependencies {
-    // we have a dependency on the common project.  Use the typesafe syntax here, but could also be written
-    // as 'api(project(":common"))'. See https://docs.gradle.org/7.0/release-notes.html on Type-safe project accessors
+    // Include the 'common' project as an implementation dependency. This is a project within the same build that this project depends on.
     implementation(projects.common)
 
+    // Include the 'web' project as a module implementation dependency. This is another project within the same build that this project depends on, specifically for module implementations.
     modlImplementation(projects.web)
 
-    // declare our dependencies on ignition sdk elements.  These are defined in the gradle/libs.versions.toml file of
-    // the root project for this module
-    compileOnly(libs.ignition.common)
-    compileOnly(libs.ignition.gateway.api)
-    implementation(libs.ignition.perspective.gateway)
-    implementation(libs.ignition.perspective.common)
-    compileOnly(libs.ia.gson)
+    // Declare dependencies on Ignition SDK elements. These dependencies are defined in the gradle/libs.versions.toml file of the root project for this module.
+    // 'compileOnly' dependencies are required for compiling the project but are not included in the runtime classpath.
+    compileOnly(libs.ignition.common) // Common libraries for Ignition
+    compileOnly(libs.ignition.gateway.api) // Gateway API libraries for Ignition
+
+    // 'implementation' dependencies are included in the runtime classpath and are necessary for both compiling and running the project.
+    implementation(libs.ignition.perspective.gateway) // Perspective gateway libraries for Ignition
+    implementation(libs.ignition.perspective.common) // Common libraries for Ignition Perspective
+    compileOnly(libs.ia.gson) // Gson library for JSON processing, used only for compilation
 }
