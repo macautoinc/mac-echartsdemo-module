@@ -2,7 +2,6 @@ import {ComponentMeta, ComponentRegistry} from '@inductiveautomation/perspective
 import '../scss/main';
 import {
     EChart,
-    // EChartMeta,
     GaugeEChartMeta
 } from './components/EChart';
 
@@ -11,7 +10,6 @@ export {EChart};
 
 // as new components are implemented, import them, and add their meta to this array
 const components: Array<ComponentMeta> = [
-    // new EChartMeta(),
     new GaugeEChartMeta()
 ];
 

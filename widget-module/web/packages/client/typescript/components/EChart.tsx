@@ -1,15 +1,10 @@
 import * as React from 'react';
-import {
-    ReactNode,
-    useEffect, useRef
-} from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import {
     AbstractUIElementStore,
     ComponentMeta,
     ComponentProps,
     ComponentStoreDelegate,
-    // Dataset,
-    // isPlainObject,
     makeLogger,
     PComponent,
     PlainObject,
@@ -17,34 +12,36 @@ import {
     ReactResizeDetector,
     ResizeDetectorRefreshRate,
     SizeObject
-    // TypeCode
 } from '@inductiveautomation/perspective-client';
-import {bind} from 'bind-decorator';
+import { bind } from 'bind-decorator';
 import cleanDeep from "clean-deep";
 import objectScan from "object-scan";
 import ReactECharts from 'echarts-for-react';
-import type {
-    EChartsType,
-    // ECharts,
-    EChartsOption
-    // SetOptionOpts
-} from "echarts";
+import type { EChartsType, EChartsOption } from "echarts";
 import EChartsReact from "echarts-for-react";
 
+// Define the component type for this custom widget
 export const COMPONENT_TYPE = "macautoinc.display.echart";
 
+// Create a logger specific for this component type
 const logger = makeLogger(COMPONENT_TYPE);
 
+// Interface defining the props specific to the EChart component
 export interface EChartProps {
     option: EChartsOption;
 }
 
+// Enum for message events between the frontend and the gateway
 // These match events in the Gateway side component delegate.
+
 enum MessageEvents {
     MESSAGE_RESPONSE_EVENT = "echart-response-event"
-    // MESSAGE_REQUEST_EVENT = "echart-request-event"
 }
 
+/**
+ * Gateway delegate class for the EChart component.
+ * Handles communication and events between the frontend and the gateway.
+ */
 export class EChartGatewayDelegate extends ComponentStoreDelegate {
     private chart: ReactECharts | null = null;
 
@@ -52,25 +49,16 @@ export class EChartGatewayDelegate extends ComponentStoreDelegate {
         super(componentStore);
     }
 
-    // @bind
-    // init(chart: ReactECharts) {
-    //     if (chart) {
-    //         this.chart = chart;
-    //     }
-    // }
     @bind
     init() {
-        // logger.info(() => "TODO: initialize EChartsGatewayDelegate");
+        // Initialization logic can be added here
     }
 
     @bind
     handleEvent(eventName: string, eventObject: PlainObject): void {
         if (this.chart) {
             logger.debug(() => `Received '${eventName}' event!`);
-            const {
-                MESSAGE_RESPONSE_EVENT
-                // MESSAGE_REQUEST_EVENT
-            } = MessageEvents;
+            const { MESSAGE_RESPONSE_EVENT } = MessageEvents;
 
             const functionToCall = eventObject.functionToCall;
 
@@ -78,7 +66,7 @@ export class EChartGatewayDelegate extends ComponentStoreDelegate {
 
             switch (eventName) {
                 case MESSAGE_RESPONSE_EVENT:
-
+                    // Handle the response event
                     break;
                 default:
                     logger.warn(() => `No delegate event handler found for event: ${eventName} in EChartGatewayDelegate`);
@@ -87,17 +75,14 @@ export class EChartGatewayDelegate extends ComponentStoreDelegate {
     }
 }
 
-
+/**
+ * The EChart component renders an ECharts chart using the provided options.
+ * It supports dynamic resizing and updates based on the provided options prop.
+ */
 export const EChart = (props: ComponentProps<EChartProps, any>) => {
-    // destructuring props
-    const {
-        // type,
-        option} = props?.props || {};
-    const {
-        emit,
-        // componentEvents,
-        store} = props;
-    const {delegate} = store || {};
+    const { option } = props?.props || {};
+    const { emit, store } = props;
+    const { delegate } = store || {};
 
     const echartRef = useRef<EChartsReact | null>(null);
 
@@ -107,15 +92,15 @@ export const EChart = (props: ComponentProps<EChartProps, any>) => {
         }
     };
 
+    // Prepare the chart options, including converting stringified functions to actual functions
     const prepareOptions = (options) => {
-
         options = cleanDeep(options);
 
         objectScan(['**'], {
-            filterFn: ({parent, property, value}) => {
-                if (typeof value === 'string' && value)  {
+            filterFn: ({ parent, property, value }) => {
+                if (typeof value === 'string' && value) {
                     const val = value.trim();
-                    if (  (val.startsWith("function(") || val.startsWith("function ("))) {
+                    if (val.startsWith("function(") || val.startsWith("function (")) {
                         let fn = null;
                         eval("fn = " + value);
                         parent[property] = fn;
@@ -127,34 +112,30 @@ export const EChart = (props: ComponentProps<EChartProps, any>) => {
     };
 
     useEffect(() => {
-        // ComponentDidMount Equivalent
-        // logger.info(`Mounting EChart Dynamic`);
-
-        // Start Gateway Delegate
+        // Initialize the delegate when the component mounts
         initDelegate();
 
         return () => {
-            // Component WillUnmount equivalent
-            // logger.info(`Unmounting EChart Dynamic`);
+            // Cleanup logic can be added here for when the component unmounts
         };
     }, []);
 
+    // Handle chart resizing
     const handleOnResize = (width, height) => {
         if (echartRef?.current) {
             const echartInstance: EChartsType = echartRef?.current?.getEchartsInstance();
-            echartInstance.resize({width, height});
+            echartInstance.resize({ width, height });
         }
     };
-    const renderComponent = (): ReactNode => {
 
+    // Render the ECharts component or a placeholder based on the provided options
+    const renderComponent = (): ReactNode => {
         if (option && Object.keys(option).length === 0 && Object.getPrototypeOf(option) === Object.prototype) {
-            return (
-                <div {...emit()} />
-            );
+            return <div {...emit()} />;
         } else {
             return (
                 <div {...emit()}>
-                    <ReactECharts ref={(e) => { echartRef.current = e; }} option={prepareOptions(option)}/>
+                    <ReactECharts ref={(e) => { echartRef.current = e; }} option={prepareOptions(option)} />
                     <ReactResizeDetector
                         handleHeight={true}
                         handleWidth={true}
@@ -167,11 +148,13 @@ export const EChart = (props: ComponentProps<EChartProps, any>) => {
         }
     };
 
-    return (
-        renderComponent()
-    );
+    return renderComponent();
 };
 
+/**
+ * Meta class for the EChart component.
+ * Provides metadata for the component including its type, view component, default size, delegate, and props reducer.
+ */
 export class EChartMeta implements ComponentMeta {
     getComponentType(): string {
         return COMPONENT_TYPE;
@@ -199,10 +182,12 @@ export class EChartMeta implements ComponentMeta {
     }
 }
 
-// TODO: Add a comment
+/**
+ * Meta class for the GaugeEChart component, extending the EChartMeta.
+ * Specifies a different component type for the gauge variant of the EChart component.
+ */
 export class GaugeEChartMeta extends EChartMeta {
     getComponentType(): string {
         return "macautoinc.display.gauge.echart";
     }
 }
-
