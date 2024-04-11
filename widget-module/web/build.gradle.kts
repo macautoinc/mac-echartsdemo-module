@@ -1,7 +1,18 @@
 import com.github.gradle.node.yarn.task.YarnTask
 import com.github.gradle.node.npm.task.NpmTask
+import java.text.SimpleDateFormat
+import java.util.Date
+
+val dateFormat = SimpleDateFormat("yyyyMMddHHmm")
+val date = Date()
+val buildDate = dateFormat.format(date)
+
+// Set the build date as an extra property
+extra["buildDate"] = buildDate
+
 
 plugins {
+    idea // Applies the IntelliJ IDEA plugin for project integration with IntelliJ IDEA IDE
     java
     `eclipse-wtp`
     id("com.github.node-gradle.node") version ("3.2.1")
@@ -10,6 +21,16 @@ plugins {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Implementation-Title" to "MAC Auto Inc. Widget",
+            "Implementation-Version" to "${project.version}",
+            "Build-Date" to date
+        )
     }
 }
 

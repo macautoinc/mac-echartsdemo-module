@@ -1,6 +1,19 @@
+import java.lang.Long
+import java.text.SimpleDateFormat
+import java.util.Date
+
+val dateFormat = SimpleDateFormat("yyyyMMddHH")
+val date = Date()
+val buildDate = dateFormat.format(date)
+
+// Set the build date as an extra property
+extra["buildDate"] = buildDate
+
 plugins {
     id("base")
     id("eclipse")
+    id("idea")
+    id("java")
 
     // the ignition module plugin: https://github.com/inductiveautomation/ignition-module-tools
     id("io.ia.sdk.modl") version ("0.1.1")
@@ -9,7 +22,7 @@ plugins {
 
 allprojects {
     group = "com.macautoinc.widget"
-    version = "1.0.0-SNAPSHOT"
+    version = "1.0.0"
 }
 
 ignitionModule {
@@ -19,10 +32,11 @@ ignitionModule {
     // module xml configuration
     name.set("MAC Auto Inc. Widget")
     id.set("com.macautoinc.widget")
-    moduleVersion.set("${project.version}")
+    moduleVersion.set("${project.version}.${extra["buildDate"]}")
     moduleDescription.set("This module provides an example on how to create a module with a widget for Perspective")
-    requiredIgnitionVersion.set("8.1.38")
+    requiredIgnitionVersion.set("8.1.10")
     license.set("license.html")
+
 
     // If we depend on other module being loaded/available, then we specify IDs of the module we depend on,
     // and specify the Ignition Scope that applies. "G" for gateway, "D" for designer, "C" for VISION client
@@ -50,6 +64,16 @@ ignitionModule {
             )
     )
     skipModlSigning.set(true)
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Implementation-Title" to "MAC Auto Inc. Widget",
+            "Implementation-Version" to "${project.version}",
+            "Build-Date" to date
+        )
+    }
 }
 
 tasks {
