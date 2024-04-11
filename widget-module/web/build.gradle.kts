@@ -3,7 +3,7 @@ import com.github.gradle.node.npm.task.NpmTask
 import java.text.SimpleDateFormat
 import java.util.Date
 
-val dateFormat = SimpleDateFormat("yyyyMMddHHmm")
+val dateFormat = SimpleDateFormat("yyyyMMddHH")
 val date = Date()
 val buildDate = dateFormat.format(date)
 
