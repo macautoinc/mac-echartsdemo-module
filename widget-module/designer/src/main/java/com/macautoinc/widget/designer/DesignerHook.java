@@ -8,7 +8,7 @@ import com.inductiveautomation.ignition.designer.model.DesignerContext;
 import com.inductiveautomation.perspective.designer.DesignerComponentRegistry;
 import com.inductiveautomation.perspective.designer.api.ComponentDesignDelegateRegistry;
 import com.inductiveautomation.perspective.designer.api.PerspectiveDesignerInterface;
-import com.macautoinc.widget.common.component.display.GaugeEChart;
+import com.macautoinc.widget.common.component.display.GaugeWidget;
 
 /**
  * The 'hook' class for the designer scope of the module. This class is responsible for initializing
@@ -52,7 +52,7 @@ public class DesignerHook extends AbstractDesignerModuleHook {
     }
 
     /**
-     * Initializes the component registry and registers the GaugeEChart component.
+     * Initializes the component registry and registers the GaugeWidget component.
      */
     private void init() {
         logger.debug("Initializing registry entrants...");
@@ -64,8 +64,8 @@ public class DesignerHook extends AbstractDesignerModuleHook {
         registry = pdi.getDesignerComponentRegistry();
         delegateRegistry = pdi.getComponentDesignDelegateRegistry();
 
-        // Register the GaugeEChart component with its descriptor.
-        registry.registerComponent(GaugeEChart.DESCRIPTOR);
+        // Register the GaugeWidget component with its descriptor.
+        registry.registerComponent(GaugeWidget.DESCRIPTOR);
     }
 
     /**
@@ -77,9 +77,9 @@ public class DesignerHook extends AbstractDesignerModuleHook {
     }
 
     /**
-     * Unregisters the GaugeEChart component from the component registry.
+     * Unregisters the GaugeWidget component from the component registry.
      */
     private void removeComponents() {
-        registry.removeComponent(GaugeEChart.COMPONENT_ID);
+        registry.removeComponent(GaugeWidget.COMPONENT_ID);
     }
 }

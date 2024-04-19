@@ -10,15 +10,15 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 /**
- * The {@code GaugeEChart} class represents a gauge-style EChart component within the MAC Auto Inc. widget module.
- * It extends the {@link BaseEChart} class, inheriting its basic properties and behaviors, while specifying
+ * The {@code GaugeWidget} class represents a gauge-style EChart component within the MAC Auto Inc. widget module.
+ * It extends the {@link BaseWidget} class, inheriting its basic properties and behaviors, while specifying
  * additional configurations and palette entries specific to gauge charts.
  * <p>
  * This class is responsible for defining the component ID, setting up the component descriptor, and registering
  * various gauge-specific variants that can be utilized within the perspective views.
  * </p>
  */
-public class GaugeEChart extends BaseEChart {
+public class GaugeWidget extends BaseWidget {
 
     /**
      * The unique identifier for the gauge EChart component. This ID is used to register and reference
@@ -55,7 +55,7 @@ public class GaugeEChart extends BaseEChart {
             .addPaletteEntry("barometer", "Barometer Gauge", "A Barometer Gauge EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/gauge/barometer.props.json")))).getAsJsonObject())
             .addPaletteEntry("clock", "Clock Gauge", "A Clock Gauge EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/gauge/clock.props.json")))).getAsJsonObject())
             .addPaletteEntry("car", "Car Gauge", "A Car Gauge EChart component.", null, (new JsonParser()).parse(new InputStreamReader(Objects.requireNonNull(Components.class.getResourceAsStream("/variants/gauge/car.props.json")))).getAsJsonObject())
-            .setDefaultMetaName("GaugeEChart")
+            .setDefaultMetaName("GaugeWidget")
             .setResources(Components.BROWSER_RESOURCES)
             .build();
 }

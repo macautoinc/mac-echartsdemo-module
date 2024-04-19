@@ -1,13 +1,11 @@
 package com.macautoinc.widget.common.component.display;
 
-import com.inductiveautomation.ignition.common.gson.JsonParser;
 import com.inductiveautomation.ignition.common.jsonschema.JsonSchema;
 import com.inductiveautomation.perspective.common.api.ComponentDescriptor;
 import com.inductiveautomation.perspective.common.api.ComponentDescriptorImpl;
 import com.macautoinc.widget.common.Components;
 
 import javax.swing.*;
-import java.io.InputStreamReader;
 import java.util.Objects;
 
 
@@ -15,10 +13,10 @@ import java.util.Objects;
  * Describes the component to the Java registry so the gateway and designer know to look for the front end elements.
  * In a 'common' scope so that it's referencable by both gateway and designer.
  */
-public class BaseEChart {
+public class BaseWidget {
 
     // unique ID of the component which perfectly matches that provided in the javascript's ComponentMeta implementation
-    public static String COMPONENT_ID = "macautoinc.display.echart";
+    public static String COMPONENT_ID = "macautoinc.display.widget";
 
     /**
      * The schema provided with the component descriptor. Use a schema instead of a plain JsonObject because it gives

@@ -21,7 +21,7 @@ import type { EChartsType, EChartsOption } from "echarts";
 import EChartsReact from "echarts-for-react";
 
 // Define the component type for this custom widget
-export const COMPONENT_TYPE = "macautoinc.display.echart";
+export const COMPONENT_TYPE = "macautoinc.display.widget";
 
 // Create a logger specific for this component type
 const logger = makeLogger(COMPONENT_TYPE);

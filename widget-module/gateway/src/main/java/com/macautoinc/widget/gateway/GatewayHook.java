@@ -8,8 +8,8 @@ import com.inductiveautomation.perspective.common.api.ComponentRegistry;
 import com.inductiveautomation.perspective.gateway.api.ComponentModelDelegateRegistry;
 import com.inductiveautomation.perspective.gateway.api.PerspectiveContext;
 import com.macautoinc.widget.common.Components;
+import com.macautoinc.widget.common.component.display.GaugeWidget;
 import com.macautoinc.widget.gateway.delegate.EChartModelDelegate;
-import com.macautoinc.widget.common.component.display.GaugeEChart;
 
 import java.util.Optional;
 
@@ -56,14 +56,14 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         // Register custom components and model delegates if the registries are available.
         if (this.componentRegistry != null) {
             log.info("Registering Custom ECharts components.");
-            this.componentRegistry.registerComponent(GaugeEChart.DESCRIPTOR);
+            this.componentRegistry.registerComponent(GaugeWidget.DESCRIPTOR);
         } else {
             log.error("Reference to component registry not found, Custom Apex Charts Components will fail to function!");
         }
 
         if (this.modelDelegateRegistry != null) {
             log.info("Registering model delegates.");
-            this.modelDelegateRegistry.register(GaugeEChart.COMPONENT_ID, EChartModelDelegate::new);
+            this.modelDelegateRegistry.register(GaugeWidget.COMPONENT_ID, EChartModelDelegate::new);
         } else {
             log.error("ModelDelegateRegistry was not found!");
         }
@@ -77,12 +77,12 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     public void shutdown() {
         log.info("Shutting down Custom ECharts module and removing registered components.");
         if (this.componentRegistry != null) {
-            this.componentRegistry.removeComponent(GaugeEChart.COMPONENT_ID);
+            this.componentRegistry.removeComponent(GaugeWidget.COMPONENT_ID);
         } else {
             log.warn("Component registry was null, could not unregister Rad Components.");
         }
         if (this.modelDelegateRegistry != null) {
-            this.modelDelegateRegistry.remove(GaugeEChart.COMPONENT_ID);
+            this.modelDelegateRegistry.remove(GaugeWidget.COMPONENT_ID);
         }
     }
 
