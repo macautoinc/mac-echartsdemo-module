@@ -27,14 +27,14 @@ allprojects {
 
 ignitionModule {
     // name of the .modl file to build
-    fileName.set("MACAutoWidget")
+    fileName.set("MACAutoWidget.signed")
 
     // module xml configuration
     name.set("MAC Auto Inc. Widget")
     id.set("com.macautoinc.widget")
     moduleVersion.set("${project.version}.${extra["buildDate"]}")
     moduleDescription.set("This module provides an example on how to create a module with a widget for Perspective")
-    requiredIgnitionVersion.set("8.1.10")
+    requiredIgnitionVersion.set("8.1.20")
     license.set("license.html")
 
 
@@ -63,7 +63,7 @@ ignitionModule {
                     "com.macautoinc.widget.designer.DesignerHook" to "D"
             )
     )
-    skipModlSigning.set(true)
+    skipModlSigning.set(false)
 }
 
 tasks.jar {
@@ -80,7 +80,7 @@ tasks {
     // set the deployModl task to post to the local gateway running in the Docker container
     // see docker-compose.yml for details
     deployModl {
-        hostGateway.set("http://localhost:59088")
+        hostGateway.set("http://localhost:9088")
     }
 }
 

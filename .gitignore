@@ -318,3 +318,4 @@ gateway/src/main/resources/mounted/Components.js
 .fake
 .vscode
 .trunk
+certs
