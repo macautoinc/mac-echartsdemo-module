@@ -17,7 +17,7 @@ import com.macautoinc.widget.common.component.display.GaugeWidget;
  */
 public class DesignerHook extends AbstractDesignerModuleHook {
     // Logger for this class, used to log informational messages and errors.
-    private static final LoggerEx logger = LoggerEx.newBuilder().build("macautoinc.echart.DesignerHook");
+    private static final LoggerEx logger = LoggerEx.newBuilder().build(DesignerHook.class.getName());
 
     // Static initializer block to add localization bundle for this module.
     static {

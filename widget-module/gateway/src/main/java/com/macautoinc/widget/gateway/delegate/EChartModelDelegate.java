@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * processing them as needed.
  */
 public class EChartModelDelegate extends ComponentModelDelegate {
-    public static final String OUTBOUND_EVENT_NAME = "echart-response-event";
-    public static final String INBOUND_EVENT_NAME = "echart-request-event";
+    public static final String OUTBOUND_EVENT_NAME = "gauge-response-event";
+    public static final String INBOUND_EVENT_NAME = "gauge-request-event";
 
     private AtomicBoolean toggleSeriesWaiting = new AtomicBoolean(false);
     private AtomicBoolean toggleSeriesReturn = new AtomicBoolean(false);

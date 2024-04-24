@@ -21,7 +21,7 @@ import java.util.Optional;
 public class GatewayHook extends AbstractGatewayModuleHook {
 
     // Logger for logging information and errors.
-    private static final LoggerEx log = LoggerEx.newBuilder().build("macautoinc.echart.gateway.GatewayHook");
+    private static final LoggerEx log = LoggerEx.newBuilder().build(GatewayHook.class.getName());
 
     // Context objects for accessing various gateway functionalities.
     private GatewayContext gatewayContext;
@@ -55,10 +55,10 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 
         // Register custom components and model delegates if the registries are available.
         if (this.componentRegistry != null) {
-            log.info("Registering Custom ECharts components.");
+            log.info("Registering Custom components.");
             this.componentRegistry.registerComponent(GaugeWidget.DESCRIPTOR);
         } else {
-            log.error("Reference to component registry not found, Custom Apex Charts Components will fail to function!");
+            log.error("Reference to component registry not found, Custom Components will fail to function!");
         }
 
         if (this.modelDelegateRegistry != null) {
@@ -75,7 +75,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
      */
     @Override
     public void shutdown() {
-        log.info("Shutting down Custom ECharts module and removing registered components.");
+        log.info("Shutting down Custom module and removing registered components.");
         if (this.componentRegistry != null) {
             this.componentRegistry.removeComponent(GaugeWidget.COMPONENT_ID);
         } else {

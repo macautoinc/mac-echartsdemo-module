@@ -42,7 +42,7 @@ val projectOutput: String by extra("$buildDir/generated-resources/")
 node {
     version.set("20.12.2")
     yarnVersion.set("1.22.22")
-    npmVersion.set("10.5.0")
+    npmVersion.set("10.5.2")
     download.set(true)
     nodeProjectDir.set(file(project.projectDir))
 }
