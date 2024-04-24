@@ -14,7 +14,8 @@
     "deepClean": "npm run clean && rimraf node_modules __coverage__"
   },
   "dependencies": {
-    "@inductiveautomation/perspective-client": "2.1.38",
+    "@inductiveautomation/perspective-client": "2.1.39",
+    "@inductiveautomation/perspective-drawing-common": "2.1.39",
     "assert": "^2.1.0",
     "axios": "^1.6.0",
     "clean-deep": "3.4.0",

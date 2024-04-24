@@ -40,7 +40,7 @@ val projectOutput: String by extra("$buildDir/generated-resources/")
 // configurations on which versions of Node, Npm, and Yarn the gradle build should use.  Configuration provided by/to
 // the gradle node plugin that"s applied above (com.moowork.node)
 node {
-    version.set("21.7.1")
+    version.set("20.12.2")
     yarnVersion.set("1.22.22")
     npmVersion.set("10.5.0")
     download.set(true)

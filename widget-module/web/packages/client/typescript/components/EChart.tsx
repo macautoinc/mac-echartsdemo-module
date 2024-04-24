@@ -10,7 +10,6 @@ import {
     PlainObject,
     PropertyTree,
     ReactResizeDetector,
-    ResizeDetectorRefreshRate,
     SizeObject
 } from '@inductiveautomation/perspective-client';
 import { bind } from 'bind-decorator';
@@ -141,7 +140,7 @@ export const EChart = (props: ComponentProps<EChartProps, any>) => {
                         handleWidth={true}
                         onResize={handleOnResize}
                         refreshMode="debounce"
-                        refreshRate={ResizeDetectorRefreshRate.STANDARD}
+                        refreshRate={33.33}
                     />
                 </div>
             );
