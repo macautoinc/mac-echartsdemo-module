@@ -24,7 +24,7 @@ public class GaugeWidget extends BaseWidget {
      * The unique identifier for the gauge EChart component. This ID is used to register and reference
      * the component within the system.
      */
-    public static String COMPONENT_ID = "macautoinc.display.gauge.echart";
+    public static String COMPONENT_ID = "macautoinc.display.widget.gauge";
 
     /**
      * The component descriptor for the gauge EChart. It includes configurations such as the palette category,

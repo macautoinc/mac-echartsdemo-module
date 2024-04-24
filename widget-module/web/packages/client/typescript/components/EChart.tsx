@@ -188,6 +188,6 @@ export class EChartMeta implements ComponentMeta {
  */
 export class GaugeEChartMeta extends EChartMeta {
     getComponentType(): string {
-        return "macautoinc.display.gauge.echart";
+        return "macautoinc.display.widget.gauge";
     }
 }
