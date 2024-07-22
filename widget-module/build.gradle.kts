@@ -63,7 +63,7 @@ ignitionModule {
                     "com.macautoinc.widget.designer.DesignerHook" to "D"
             )
     )
-    skipModlSigning.set(false)
+    skipModlSigning.set(true)
 }
 
 tasks.jar {
