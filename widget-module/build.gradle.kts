@@ -27,7 +27,7 @@ allprojects {
 
 ignitionModule {
     // name of the .modl file to build
-    fileName.set("MACAutoWidget.signed")
+    fileName.set("MACAutoWidget")
 
     // module xml configuration
     name.set("MAC Auto Inc. Widget")
@@ -63,7 +63,7 @@ ignitionModule {
                     "com.macautoinc.widget.designer.DesignerHook" to "D"
             )
     )
-    skipModlSigning.set(false)
+    skipModlSigning.set(true)
 }
 
 tasks.jar {
