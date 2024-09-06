@@ -28,7 +28,7 @@ public class Components {
      * The category under which the custom widget components are grouped in the component palette.
      * This helps in organizing and finding the components easily within the design environment.
      */
-    public static final String COMPONENT_CATEGORY = "Gauge Widgets";
+    public static final String COMPONENT_CATEGORY = "MAC Widgets";
 
     /**
      * A set of {@link BrowserResource} objects representing the JavaScript and CSS resources

@@ -27,10 +27,10 @@ allprojects {
 
 ignitionModule {
     // name of the .modl file to build
-    fileName.set("MACAutoWidget")
+    fileName.set("MACGaugeWidget")
 
     // module xml configuration
-    name.set("MAC Auto Inc. Widget")
+    name.set("MAC Gauge Widget")
     id.set("com.macautoinc.widget")
     moduleVersion.set("${project.version}.${extra["buildDate"]}")
     moduleDescription.set("This module provides an example on how to create a module with a widget for Perspective")

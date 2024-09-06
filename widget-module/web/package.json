@@ -3,7 +3,7 @@
   "version": "1.22.22",
   "description": "MACAutoInc Perspective Components",
   "main": "dist/index.js",
-  "author": "Mac Automation Inc.",
+  "author": "MAC Automation Inc.",
   "license": "MIT",
   "private": true,
   "workspaces": [
