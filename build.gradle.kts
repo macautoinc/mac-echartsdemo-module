@@ -26,3 +26,9 @@ subprojects {
         useJUnitPlatform()
     }
 }
+
+// Root build.gradle.kts
+tasks.wrapper {
+    gradleVersion = "7.4.2" // Specify the Gradle version you want to use
+    distributionType = Wrapper.DistributionType.ALL
+}

@@ -84,6 +84,12 @@ tasks {
     }
 }
 
+// Root build.gradle.kts
+tasks.wrapper {
+    gradleVersion = "7.4.2" // Specify the Gradle version you want to use
+    distributionType = Wrapper.DistributionType.ALL
+}
+
 val deepClean by tasks.registering {
     dependsOn(allprojects.map { "${it.path}:clean" })
     description = "Executes clean tasks and remove node plugin caches."
